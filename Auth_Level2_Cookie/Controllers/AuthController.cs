@@ -28,10 +28,10 @@ public class AuthController : ControllerBase
             new Claim(ClaimTypes.Role, user.Role)
         };
 
-        var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+        var identity = new ClaimsIdentity(claims, "Oreo");
         var principal = new ClaimsPrincipal(identity);
 
-        await HttpContext.SignInAsync("MyCookieAuth", principal);
+        await HttpContext.SignInAsync("Oreo", principal);
 
         return Ok("Logged In");
     }
@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
     [HttpGet("logout")]
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync("MyCookieAuth");
+        await HttpContext.SignOutAsync("Oreo");
         return Ok("Logged Out");
     }
 

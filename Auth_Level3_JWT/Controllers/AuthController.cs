@@ -30,7 +30,8 @@ public class AuthController : ControllerBase
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role)
+            new Claim(ClaimTypes.Role, user.Role),
+            new Claim("isLoggedIn", "true")
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));

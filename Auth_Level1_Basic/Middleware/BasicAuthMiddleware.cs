@@ -6,6 +6,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Auth_Level1_Basic.Middleware;
 
+
+public class SomeRandomMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public SomeRandomMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+    public async Task Invoke(HttpContext context)
+    {
+       
+        var temp = context.Request.Headers;
+        Console.WriteLine("Hello from SomeRandomMiddleware");
+    }
+}
+
+
 public class BasicAuthMiddleware
 {
     private readonly RequestDelegate _next;

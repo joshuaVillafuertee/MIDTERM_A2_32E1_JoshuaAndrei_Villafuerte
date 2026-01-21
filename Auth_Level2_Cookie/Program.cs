@@ -10,11 +10,11 @@ builder.Services.AddSwaggerGen(); // Standard Swagger
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=auth.db"));
 
-builder.Services.AddAuthentication("MyCookieAuth")
-    .AddCookie("MyCookieAuth", options =>
+builder.Services.AddAuthentication("Oreo")
+    .AddCookie("Oreo", options =>
     {
-        options.Cookie.Name = "UserSession";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.Cookie.Name = "CookieSession";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
     });
 
 var app = builder.Build();

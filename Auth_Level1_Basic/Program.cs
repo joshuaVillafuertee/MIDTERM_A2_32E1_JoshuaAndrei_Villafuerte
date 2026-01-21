@@ -40,7 +40,7 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<BasicAuthMiddleware>();
+app.UseMiddleware<SomeRandomMiddleware>();
 
 app.MapControllers();
 
