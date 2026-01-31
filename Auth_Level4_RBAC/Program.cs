@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,4 +76,15 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.StartAsync();
+try
+{
+    var server = app.Services.GetRequiredService<IServer>();
+    var addresses = server.Features.Get<IServerAddressesFeature>()?.Addresses;
+    var first = addresses?.FirstOrDefault() ?? "http://localhost:5000";
+    var url = first.TrimEnd('/') + "/swagger";
+    Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
+}
+catch { }
+
+await app.WaitForShutdownAsync();

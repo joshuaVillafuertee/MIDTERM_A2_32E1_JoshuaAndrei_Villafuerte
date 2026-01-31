@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, user.Role)
+            // role removed from User model in this project
         };
 
         var identity = new ClaimsIdentity(claims, "Oreo");
@@ -48,8 +48,9 @@ public class AuthController : ControllerBase
     public IActionResult GetSecure()
     {
         // Check if User is Authenticated
-        if (!User.Identity.IsAuthenticated) return Unauthorized();
-        
-        return Ok($"Hello {User.Identity.Name}, you are accessing secure data!");
+        if (!(User?.Identity?.IsAuthenticated ?? false)) return Unauthorized();
+
+        var name = User?.Identity?.Name ?? "Unknown";
+        return Ok($"Hello {name}, you are accessing secure data!");
     }
 }

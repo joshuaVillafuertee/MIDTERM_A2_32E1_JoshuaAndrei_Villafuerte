@@ -52,6 +52,7 @@ public class AuthController : ControllerBase
     [HttpGet("secure")]
     public IActionResult GetSecure()
     {
-        return Ok($"Authenticated! User: {User.Identity.Name}");
+        var name = User?.Identity?.Name ?? "Unknown";
+        return Ok($"Authenticated! User: {name}");
     }
 }

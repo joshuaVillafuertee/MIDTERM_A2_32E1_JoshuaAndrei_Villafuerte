@@ -14,8 +14,8 @@ public class IdentityController : ControllerBase
         return Ok(new
         {
             message = "You have accessed the IdentityServer Protected API!",
-            user = User.Identity.Name,
-            claims = User.Claims.Select(c => new { c.Type, c.Value })
+            user = User?.Identity?.Name ?? "Unknown",
+            claims = User?.Claims.Select(c => new { c.Type, c.Value }) ?? Enumerable.Empty<object>()
         });
     }
 }
